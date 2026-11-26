@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Policarpio EmTech Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,800&display=swap">
+
+<!-- =========================================================
+     1) PASTE YOUR LINKS HERE
+     Put each share link between the quotes after  link:
+     Supported previews: YouTube, Google Drive, Google Sheets
+     or Slides, Canva "view" links, .mp4 files and image files.
+     In Google Drive or Canva, set sharing so that anyone
+     with the link can view.
+     ========================================================= -->
+<script>
+const PROJECTS = [
+  {
+    type: "excel",
+    title: "Build The Financial Dashboard",
+    description: "An Excel dashboard that organizes financial data into a clear, visual summary.",
+    link: ""   // Google Drive, Google Sheets, or OneDrive share link
+  },
+  {
+    type: "excel",
+    title: "Create a Sales Infographic",
+    description: "Sales data from Excel turned into charts and highlights that are quick to read.",
+    link: ""   // Google Drive, Google Sheets, or OneDrive share link
+  },
+  {
+    type: "canva",
+    title: "Design with Purpose",
+    description: "A Canva design where layout, color and type work together to deliver a message.",
+    link: ""   // Canva view link, or an image file such as "design.png"
+  },
+  {
+    type: "canva",
+    title: "Create an Infographic",
+    description: "A Canva infographic that explains information through visuals and short text.",
+    link: ""   // Canva view link, or an image file such as "infographic.png"
+  },
+  {
+    type: "video",
+    title: "Advocacy Design Challenge",
+    description: "A video project that raises awareness and encourages viewers to take action.",
+    link: ""   // YouTube link, Google Drive link, or a file such as "advocacy.mp4"
+  },
+  {
+    type: "ppt",
+    title: "Build Your Mini Presentation",
+    description: "A short PowerPoint presentation that shares one topic in a focused way.",
+    link: ""   // Google Drive or Google Slides share link, or a .pptx file
+  }
+];
+</script>
+
+<!-- =========================================================
+     2) STYLES
+     ========================================================= -->
+<style>
+  /* Layout: red hero with a fanned card stack, star dividers, 3-2-1 column card gallery */
+  :root {
+    color-scheme: light;
+    --red: #EE1515;
+    --red-dark: #B80F0F;
+    --white: #FFFFFF;
+    --ink: #222224;
+    --mist: #F3F3F5;
+    --muted: #55555B;
+    --excel: #107C41;
+    --canva-a: #2563EB;
+    --canva-b: #7C3AED;
+    --video: #D30F0F;
+    --ppt: #BF4A0A;
+    --display: "Fredoka", "Trebuchet MS", sans-serif;
+    --body: "Nunito Sans", "Segoe UI", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--white); color: var(--ink); font: 400 1rem/1.6 var(--body); }
+  .wrap {
+    max-width: 1120px; margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wrap: balance; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; box-shadow: 0 0 0 6px var(--white); }
+
+  /* Hero */
+  .hero {
+    background-color: var(--red); color: var(--white); border-bottom: 8px solid var(--ink);
+    margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 2rem; align-items: center; padding-block: 4rem; }
+  .hero h1 { font-size: clamp(2.1rem, 5.4vw, 3.8rem); font-weight: 700; }
+  .name-tag {
+    display: inline-block; margin: 0 0 1.1rem; padding: .35rem .9rem;
+    background: var(--white); color: var(--ink); border: 3px solid var(--ink);
+    border-radius: 10px; font-weight: 800;
+  }
+  .hero p.intro { max-width: 52ch; font-size: 1.1rem; font-weight: 700; margin: 1.1rem 0 1.7rem; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+    min-height: 46px; padding: .55rem 1.2rem;
+    border: 3px solid var(--ink); border-radius: 12px;
+    background: var(--white); color: var(--ink);
+    font: 600 1rem var(--display); text-decoration: none; cursor: pointer;
+    box-shadow: 0 4px 0 var(--ink); transition: transform .12s, box-shadow .12s;
+  }
+  .btn:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--ink); }
+  .btn.primary { background: var(--red); color: var(--white); }
+  .btn.primary:hover { background: var(--red-dark); }
+  .btn[disabled] { background: var(--mist); color: var(--muted); box-shadow: none; transform: none; cursor: not-allowed; }
+
+  .fan { position: relative; height: 290px; }
+  .fan div {
+    position: absolute; left: 50%; top: 30px; width: 160px; height: 224px; margin-left: -80px;
+    background: var(--white); color: var(--ink); border: 5px solid var(--ink); border-radius: 16px;
+    display: grid; place-content: center; text-align: center;
+    font: 700 1.5rem var(--display); transform-origin: 50% 120%;
+    box-shadow: 0 8px 20px rgba(34,34,36,.3);
+  }
+  .fan div:nth-child(1) { transform: translateX(-78px) rotate(-14deg); }
+  .fan div:nth-child(3) { transform: translateX(78px) rotate(14deg); }
+  .fan div:nth-child(2) { z-index: 1; }
+  .fan small { display: block; font: 800 .9rem var(--body); color: var(--muted); }
+
+  /* Star divider */
+  .divider { display: flex; align-items: center; gap: 14px; margin-block: 2.5rem; }
+  .divider::before, .divider::after { content: ""; flex: 1; height: 6px; border-radius: 6px; background: var(--ink); }
+  .divider svg { width: 44px; height: 44px; flex: none; }
+
+  /* Gallery */
+  .section-head { text-align: center; }
+  .section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
+  .section-head p { margin: .5rem 0 0; color: var(--muted); }
+  .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin-block: 1.5rem 2rem; }
+  .filters .btn[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.6rem; }
+
+  .card {
+    --type: var(--ink);
+    display: flex; flex-direction: column; min-width: 0;
+    background: var(--white); border: 5px solid var(--ink); border-radius: 22px; overflow: hidden;
+    box-shadow: 0 8px 0 rgba(34,34,36,.18); transition: transform .18s, box-shadow .18s;
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 13px 0 rgba(34,34,36,.14); }
+  .card.excel { --type: var(--excel); }
+  .card.canva { --type: var(--canva-b); }
+  .card.video { --type: var(--video); }
+  .card.ppt   { --type: var(--ppt); }
+  .card-top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .7rem .85rem; border-top: 8px solid var(--type); }
+  .number { font: 600 1rem var(--display); font-variant-numeric: tabular-nums; }
+  .badge { padding: .2rem .75rem; border-radius: 999px; background: var(--type); color: var(--white); font-size: .82rem; font-weight: 800; }
+  .card.canva .badge { background: linear-gradient(90deg, var(--canva-a), var(--canva-b)); }
+  .preview {
+    position: relative; margin: 0 .85rem; aspect-ratio: 16 / 10;
+    background: var(--mist); border: 3px solid var(--ink); border-radius: 12px; overflow: hidden;
+  }
+  .card.video .preview { aspect-ratio: 16 / 9; }
+  .preview iframe, .preview video, .preview img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .preview img { object-fit: contain; }
+  .placeholder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .3rem; padding: .8rem; text-align: center; color: var(--muted); font-weight: 700; font-size: .92rem; }
+  .placeholder b { font: 700 2rem var(--display); color: var(--type); }
+  .card-body { display: flex; flex-direction: column; flex: 1; padding: 1rem .95rem 1.2rem; }
+  .card h3 { font-size: 1.35rem; font-weight: 600; }
+  .card p { margin: .5rem 0 1.1rem; color: var(--muted); }
+  .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: auto; }
+  .actions .btn { flex: 1 1 8rem; }
+
+  footer { background: var(--ink); color: var(--white); border-top: 8px solid var(--red); text-align: center; margin-top: 3.5rem; }
+  footer .wrap { padding-block: 1.8rem; }
+
+  /* Tablet and phone */
+  @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 720px) {
+    .hero .wrap { grid-template-columns: minmax(0, 1fr); text-align: center; padding-block: 2.8rem; }
+    .hero p.intro { margin-inline: auto; }
+    .fan { display: none; }
+  }
+  @media (max-width: 620px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+
+</head>
+<body>
+<!-- =========================================================
+     3) PAGE CONTENT  (edit your name and intro here)
+     ========================================================= -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <p class="name-tag">Empowerment Technologies</p>
+      <h1>Rimes Lander G. Policarpio EmTech Performance Task</h1>
+      <p class="intro">Welcome to my portfolio! Here are my six Performance Tasks in Empowerment Technologies, from spreadsheets and designs to video and presentation work.</p>
+      <a class="btn" href="#projects">See my projects</a>
+    </div>
+    <div class="fan" aria-hidden="true">
+      <div>XLSX</div>
+      <div>6<small>Performance Tasks</small></div>
+      <div>PPT</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="projects">
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 44 44"><rect x="9" y="9" width="26" height="26" rx="6" transform="rotate(45 22 22)" fill="#EE1515" stroke="#222224" stroke-width="4"/><path d="M22 11 L25 19 L33 22 L25 25 L22 33 L19 25 L11 22 L19 19 Z" fill="#FFFFFF"/></svg>
+  </div>
+  <div class="section-head">
+    <h2>Project Collection</h2>
+    <p>Pick a file type to filter the cards.</p>
+  </div>
+  <div class="filters" role="group" aria-label="Filter projects by file type">
+    <button type="button" class="btn" data-filter="all" aria-pressed="true">All</button>
+    <button type="button" class="btn" data-filter="excel" aria-pressed="false">Excel</button>
+    <button type="button" class="btn" data-filter="canva" aria-pressed="false">Canva</button>
+    <button type="button" class="btn" data-filter="video" aria-pressed="false">Video</button>
+    <button type="button" class="btn" data-filter="ppt" aria-pressed="false">PowerPoint</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <div class="wrap">Rimes Lander G. Policarpio · EmTech Performance Task</div>
+</footer>
+
+<!-- =========================================================
+     4) SCRIPT  (no need to edit below this line)
+     ========================================================= -->
+<script>
+const TYPES = {
+  excel: { badge: "Excel",   icon: "XLSX" },
+  canva: { badge: "Canva",   icon: "Canva" },
+  video: { badge: "▶ Play",  icon: "▶" },
+  ppt:   { badge: "PPT",     icon: "PPT" }
+};
+
+/* Turns a normal share link into something that can be previewed.
+   Returns { kind: "frame" | "video" | "image" | "none", src, download } */
+function readLink(link) {
+  const raw = (link || "").trim();
+  const none = { kind: "none", src: "", download: "" };
+  if (!raw) return none;
+
+  let url;
+  try { url = new URL(raw, "https://relative.invalid/"); } catch (e) { return none; }
+  if (!/^https?:$/.test(url.protocol)) return none;
+
+  const host = url.hostname.replace(/^www\./, "");
+  const path = url.pathname;
+  const frame = (src, download = "") => ({ kind: "frame", src, download });
+
+  // YouTube
+  if (host === "youtu.be" || host === "youtube.com" || host === "m.youtube.com") {
+    const m = host === "youtu.be"
+      ? path.match(/^\/([\w-]{6,})/)
+      : path.match(/^\/(?:embed|shorts|live)\/([\w-]{6,})/);
+    const id = m ? m[1] : url.searchParams.get("v");
+    return id ? frame("https://www.youtube.com/embed/" + encodeURIComponent(id)) : none;
+  }
+  // Google Drive file
+  if (host === "drive.google.com") {
+    const m = path.match(/\/file\/d\/([\w-]+)/);
+    const id = m ? m[1] : url.searchParams.get("id");
+    return id ? frame(`https://drive.google.com/file/d/${id}/preview`,
+                      `https://drive.google.com/uc?export=download&id=${id}`) : none;
+  }
+  // Google Sheets and Slides
+  if (host === "docs.google.com") {
+    const m = path.match(/^\/(spreadsheets|presentation)\/d\/(?!e\/)([\w-]+)/);
+    if (!m) return none;
+    const base = `https://docs.google.com/${m[1]}/d/${m[2]}`;
+    return frame(base + "/preview", base + (m[1] === "presentation" ? "/export/pptx" : "/export?format=xlsx"));
+  }
+  // Canva public view links
+  if (host === "canva.com" && /^\/design\/.+\/(view|watch)$/.test(path)) {
+    return frame(`https://www.canva.com${path}?embed`);
+  }
+  // Direct files
+  if (/\.(mp4|webm|ogg)$/i.test(path)) return { kind: "video", src: raw, download: "" };
+  if (/\.(png|jpe?g|gif|webp|svg)$/i.test(path)) return { kind: "image", src: raw, download: "" };
+  if (/\.pptx?$/i.test(path)) return { kind: "none", src: "", download: raw };
+  return none;
+}
+
+/* Small helper for creating elements safely */
+function el(tag, props = {}, ...children) {
+  const node = Object.assign(document.createElement(tag), props);
+  node.append(...children);
+  return node;
+}
+
+function placeholder(type, message) {
+  return el("div", { className: "placeholder" },
+    el("b", { textContent: TYPES[type].icon }),
+    el("span", { textContent: message }));
+}
+
+/* If the page's host blocks an embed, show a message instead of a blank box */
+const OPEN_MESSAGE = "Press View Project to open this work.";
+document.addEventListener("securitypolicyviolation", (event) => {
+  if (!/^(frame|child|media|img)-src/.test(event.effectiveDirective || "")) return;
+  document.querySelectorAll(".preview[data-src]").forEach((box) => {
+    const blocked = event.blockedURI || "";
+    const full = new URL(box.dataset.src, location.href);
+    if (blocked && (full.href.startsWith(blocked) || blocked.startsWith(full.origin))) {
+      box.replaceChildren(placeholder(box.dataset.type, OPEN_MESSAGE));
+    }
+  });
+});
+
+const grid = document.getElementById("grid");
+
+PROJECTS.forEach((project, index) => {
+  const type = TYPES[project.type];
+  const info = readLink(project.link);
+  const hasLink = Boolean((project.link || "").trim());
+  const preview = el("div", { className: "preview" });
+  preview.dataset.type = project.type;
+
+  // Claude's artifact viewer does not allow embeds from other sites
+  const embedBlocked = info.kind === "frame" && /(^|\.)(claude\.ai|claudeusercontent\.com)$/.test(location.hostname);
+
+  if (info.kind === "none" || embedBlocked) {
+    preview.append(placeholder(project.type, hasLink ? OPEN_MESSAGE : "Preview coming soon"));
+  } else {
+    preview.dataset.src = info.src;
+    if (info.kind === "frame") {
+      preview.append(el("iframe", { src: info.src, title: project.title + " preview", loading: "lazy",
+        allow: "autoplay; encrypted-media; fullscreen; picture-in-picture", allowFullscreen: true }));
+    } else if (info.kind === "video") {
+      preview.append(el("video", { src: info.src, controls: true, preload: "metadata", playsInline: true }));
+    } else {
+      preview.append(el("img", { src: info.src, alt: project.title }));
+    }
+  }
+
+  const actions = el("div", { className: "actions" });
+  if (hasLink) {
+    actions.append(el("a", { className: "btn primary", href: project.link.trim(), target: "_blank", rel: "noopener", textContent: "View Project" }));
+    if (project.type === "ppt" && info.download) {
+      actions.append(el("a", { className: "btn", href: info.download, target: "_blank", rel: "noopener", textContent: "Download" }));
+    }
+  } else {
+    actions.append(el("button", { type: "button", className: "btn", disabled: true, textContent: "Link coming soon" }));
+  }
+
+  const card = el("article", { className: "card " + project.type },
+    el("div", { className: "card-top" },
+      el("span", { className: "number", textContent: "No. " + String(index + 1).padStart(3, "0") }),
+      el("span", { className: "badge", textContent: type.badge })),
+    preview,
+    el("div", { className: "card-body" },
+      el("h3", { textContent: project.title }),
+      el("p", { textContent: project.description }),
+      actions));
+  grid.append(card);
+});
+
+/* Filter buttons */
+const filterButtons = document.querySelectorAll("[data-filter]");
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const choice = button.dataset.filter;
+    filterButtons.forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+    grid.querySelectorAll(".card").forEach((card) => {
+      card.hidden = choice !== "all" && !card.classList.contains(choice);
+    });
+  });
+});
+</script>
+</body>
+  </html>
